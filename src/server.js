@@ -9,7 +9,14 @@ const sendEmail = require('./sendEmail');
 const app = express()
 
 const port = process.env.PORT || 8081;
-const urlencodedParser = bodyParser.urlencoded({extended: true})
+const urlencodedParser = bodyParser.urlencoded({extended: true});
+
+app.use((req, res, next) => {
+    res.append('Access-Control-Allow-Origin', ['https://rosem-portfolio.netlify.app']);
+    res.append('Access-Control-Allow-Methods', 'POST');
+    res.append('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
 
 app.use(urlencodedParser);
 app.use(bodyParser.json());
